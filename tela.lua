@@ -1,10 +1,9 @@
 --[[
-    Voidrake Hub - EXTREME VIP Loading + External Script
+    Voidrake - EXTREME VIP Loading Screen
     Powered by: Deathbringer
-    Features: Tela de carregamento épica (34s) + carregamento do script externo.
+    Features: Tela de carregamento épica (34s), "Voidrake" em fonte Code, efeitos premium.
 ]]
 
--- ========== [ Tela de Carregamento EXTREME VIP (34s) ] ==========
 local function createExtremeLoadingScreen()
     local loadingGui = Instance.new("ScreenGui")
     loadingGui.Name = "VoidrakeLoading"
@@ -23,8 +22,8 @@ local function createExtremeLoadingScreen()
 
     local gradient = Instance.new("UIGradient")
     gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(20, 0, 40)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(40, 0, 80))
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(15, 0, 30)),  -- Roxo mais escuro
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(30, 0, 60))
     }
     gradient.Rotation = 45
     gradient.Parent = background
@@ -43,46 +42,46 @@ local function createExtremeLoadingScreen()
         end
     end)()
 
-    -- Logo "VOIDRAKE HUB" (GothamBlack + efeito dourado)
+    -- Logo "Voidrake" (Fonte: Code + efeito metálico)
     local logo = Instance.new("TextLabel")
     logo.Name = "Logo"
-    logo.Size = UDim2.new(0.6, 0, 0.2, 0)
+    logo.Size = UDim2.new(0.5, 0, 0.2, 0)
     logo.Position = UDim2.new(0.5, 0, 0.3, 0)
     logo.AnchorPoint = Vector2.new(0.5, 0)
-    logo.Text = "VOIDRAKE HUB"
-    logo.TextColor3 = Color3.fromRGB(255, 215, 0) -- Dourado VIP
-    logo.TextStrokeColor3 = Color3.fromRGB(200, 100, 255) -- Contorno roxo
+    logo.Text = "Voidrake"
+    logo.TextColor3 = Color3.fromRGB(200, 200, 255)  -- Azul claro premium
+    logo.TextStrokeColor3 = Color3.fromRGB(100, 100, 255)  -- Contorno azul metálico
     logo.TextStrokeTransparency = 0
     logo.TextSize = 50
-    logo.Font = Enum.Font.GothamBlack
+    logo.Font = Enum.Font.Code  -- Fonte ajustada para "Code"
     logo.BackgroundTransparency = 1
-    logo.TextScaled = true
+    logo.TextScaled = false  -- Desabilitado para manter o tamanho fixo
     logo.Parent = background
 
-    -- Efeito de brilho no logo
+    -- Efeito de brilho metálico no logo
     coroutine.wrap(function()
         while true do
-            logo.TextColor3 = Color3.fromRGB(255, 215 + math.sin(os.clock() * 2) * 40, 0)
+            logo.TextColor3 = Color3.fromRGB(200 + math.sin(os.clock() * 2) * 30, 200 + math.sin(os.clock() * 1.5) * 30, 255)
             task.wait(0.05)
         end
     end)()
 
-    -- Subtítulo "Powered by Deathbringer" (SciFi + efeito de digitação)
+    -- Subtítulo "Powered by Deathbringer" (Fonte: SciFi)
     local subtitle = Instance.new("TextLabel")
     subtitle.Name = "Subtitle"
-    subtitle.Size = UDim2.new(0.5, 0, 0.1, 0)
+    subtitle.Size = UDim2.new(0.4, 0, 0.1, 0)
     subtitle.Position = UDim2.new(0.5, 0, 0.5, 0)
     subtitle.AnchorPoint = Vector2.new(0.5, 0)
     subtitle.Text = ""
     subtitle.TextColor3 = Color3.fromRGB(150, 100, 200)
     subtitle.TextStrokeTransparency = 0
-    subtitle.TextSize = 24
+    subtitle.TextSize = 20
     subtitle.Font = Enum.Font.SciFi
     subtitle.BackgroundTransparency = 1
     subtitle.Parent = background
 
     -- Efeito de digitação
-    local fullText = "POWERED BY: DEATHBRINGER"
+    local fullText = "Powered by: Deathbringer"
     coroutine.wrap(function()
         for i = 1, #fullText do
             subtitle.Text = string.sub(fullText, 1, i)
@@ -90,7 +89,7 @@ local function createExtremeLoadingScreen()
         end
     end)()
 
-    -- Texto "Carregando módulos" (Arcade + pontos animados)
+    -- Texto "Carregando módulos" (Fonte: Arcade + pontos animados)
     local loadingText = Instance.new("TextLabel")
     loadingText.Name = "LoadingText"
     loadingText.Size = UDim2.new(0.4, 0, 0.05, 0)
@@ -99,7 +98,7 @@ local function createExtremeLoadingScreen()
     loadingText.Text = "Carregando módulos"
     loadingText.TextColor3 = Color3.fromRGB(200, 200, 200)
     loadingText.TextStrokeTransparency = 0
-    loadingText.TextSize = 20
+    loadingText.TextSize = 18
     loadingText.Font = Enum.Font.Arcade
     loadingText.BackgroundTransparency = 1
     loadingText.Parent = background
@@ -128,7 +127,7 @@ local function createExtremeLoadingScreen()
     local progressFill = Instance.new("Frame")
     progressFill.Name = "ProgressFill"
     progressFill.Size = UDim2.new(0, 0, 1, 0)
-    progressFill.BackgroundColor3 = Color3.fromRGB(255, 215, 0) -- Dourado VIP
+    progressFill.BackgroundColor3 = Color3.fromRGB(200, 200, 255)  -- Azul claro premium
     progressFill.BorderSizePixel = 0
     progressFill.Parent = progressBar
 
@@ -147,7 +146,7 @@ local function createExtremeLoadingScreen()
 
     -- Animação da barra (34 segundos)
     local startTime = os.clock()
-    local duration = 34 -- 34 segundos
+    local duration = 34  -- 34 segundos
     while os.clock() - startTime < duration do
         local progress = math.min((os.clock() - startTime) / duration, 1)
         progressFill.Size = UDim2.new(progress, 0, 1, 0)
