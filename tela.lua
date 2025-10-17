@@ -1,7 +1,7 @@
 --[[
     Voidrake - EXTREME VIP Loading Screen
     Powered by: Deathbringer
-    Features: Tela de carregamento épica (34s), "Voidrake" em fonte Code, efeitos premium.
+    Features: Tela de carregamento.
 ]]
 
 local function createExtremeLoadingScreen()
